@@ -17,7 +17,7 @@ resource "kubernetes_pod" "unittest" {
     container {
       name    = "frontend"
       image   = "hsndocker/frontend:${var.frontend_version}"
-      # command = ["/bin/bash", "-c", ""]
+      command = ["/bin/sh", "-c", "ls"]
       # args    = ["start.sh"]
 
       # port {

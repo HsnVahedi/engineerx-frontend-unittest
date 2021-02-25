@@ -24,7 +24,7 @@ pipeline {
                 sh './terraform init'
                 sh "./terraform apply -var test_number=${env.BUILD_ID} -var frontend_version=${params.FRONTEND_VERSION} --auto-approve"
                 sh "./kubectl wait --for=condition=ready --timeout=600s -n frontend-unittest pod/unittest-${env.BUILD_ID}" 
-		        sh "./kubectl exec -n frontend-unittest unittest-${env.BUILD_ID} -c frontend -- npm run test"
+		sh "./kubectl exec -n frontend-unittest unittest-${env.BUILD_ID} -c frontend -- npm run test"
             }
             post {
                 always {
