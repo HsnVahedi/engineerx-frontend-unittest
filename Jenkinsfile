@@ -7,7 +7,7 @@ pipeline {
     }
     
     parameters {
-        string(name: 'BACKEND_VERSION', defaultValue: 'latest')
+        string(name: 'FRONTEND_VERSION', defaultValue: 'latest')
     }
     stages {
         stage('Configure kubectl and terraform') {
@@ -19,26 +19,26 @@ pipeline {
                 sh 'cp /root/kubectl/kubectl .'
             }
         } 
-        stage('Deploy Backend Unittest') {
+        stage('Deploy Frontend Unittest') {
             steps {
                 sh './terraform init'
-                sh "./terraform apply -var test_number=${env.BUILD_ID} -var backend_version=${params.BACKEND_VERSION} --auto-approve"
-                sh "./kubectl wait --for=condition=ready --timeout=600s -n backend-unittest pod/unittest-${env.BUILD_ID}" 
-		        sh "./kubectl exec -n backend-unittest unittest-${env.BUILD_ID} -c backend -- bash unittest.sh"
+                sh "./terraform apply -var test_number=${env.BUILD_ID} -var frontend_version=${params.FRONTEND_VERSION} --auto-approve"
+                sh "./kubectl wait --for=condition=ready --timeout=600s -n frontend-unittest pod/unittest-${env.BUILD_ID}" 
+		        sh "./kubectl exec -n frontend-unittest unittest-${env.BUILD_ID} -c frontend -- npm run test"
             }
             post {
                 always {
-                    sh "./terraform destroy -var test_number=${env.BUILD_ID} -var backend_version=${params.BACKEND_VERSION} --auto-approve"
+                    sh "./terraform destroy -var test_number=${env.BUILD_ID} -var frontend_version=${params.FRONTEND_VERSION} --auto-approve"
                 }
             }
         }
         
-        stage('Invoke Setting latest tags') {
-            steps {
-                build job: 'engineerx-backend-latest-tag', parameters: [
-                    string(name: "BACKEND_VERSION", value: "${params.BACKEND_VERSION}")
-                ]
-            }
-        }
+        // stage('Invoke Setting latest tags') {
+        //     steps {
+        //         build job: 'engineerx-backend-latest-tag', parameters: [
+        //             string(name: "BACKEND_VERSION", value: "${params.BACKEND_VERSION}")
+        //         ]
+        //     }
+        // }
     }
 }
