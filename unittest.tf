@@ -18,11 +18,6 @@ resource "kubernetes_pod" "unittest" {
       name    = "frontend"
       image   = "hsndocker/frontend:${var.frontend_version}"
       command = ["/bin/sh", "-c", "sleep infinity"]
-      # args    = ["start.sh"]
-
-      # port {
-      #   container_port = 3000
-      # }
 
       resources {
         limits = {
