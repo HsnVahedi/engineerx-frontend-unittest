@@ -21,13 +21,13 @@ resource "kubernetes_pod" "unittest" {
 
       resources {
         limits = {
-          cpu    = "1000m"
-          memory = "256Mi"
+          cpu    = "1500m"
+          memory = "512Mi"
         }
 
         requests = {
-          memory = "128Mi"
-          cpu    = "400m"
+          memory = "256Mi"
+          cpu    = "900m"
         }
       }
     }
