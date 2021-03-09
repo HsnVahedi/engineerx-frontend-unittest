@@ -5,7 +5,7 @@ resource "kubernetes_pod" "unittest" {
 
     labels = {
       app  = "frontend"
-      role = "unittest"
+      role = "frontend-unittest"
     }
   }
 
@@ -30,6 +30,10 @@ resource "kubernetes_pod" "unittest" {
           cpu    = "400m"
         }
       }
+    }
+
+    image_pull_secrets {
+      name = kubernetes_secret.dockerhub_cred.metadata[0].name
     }
   }
 }
