@@ -1,6 +1,6 @@
 resource "kubernetes_secret" "dockerhub_cred" {
   metadata {
-    name = "dockerhub-cred"
+    name = "dockerhub-cred-${var.test_number}"
     namespace = "frontend-unittest"
     labels = {
       role = "frontend-unittest"
