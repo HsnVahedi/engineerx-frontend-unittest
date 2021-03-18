@@ -35,8 +35,8 @@ pipeline {
             steps {
                 sh 'terraform init'
                 sh('terraform apply -var test_number=$BUILD_ID -var frontend_version=$FRONTEND_VERSION -var dockerhub_username=$DOCKERHUB_CRED_USR -var dockerhub_password=$DOCKERHUB_CRED_PSW --auto-approve')
-                sh "kubectl wait --for=condition=ready --timeout=600s -n frontend-unittest pod/unittest-${env.BUILD_ID}" 
-		        sh "kubectl exec -n frontend-unittest unittest-${env.BUILD_ID} -c frontend -- npm run test"
+                sh "kubectl wait --for=condition=ready --timeout=600s -n frontend-test pod/unittest-${env.BUILD_ID}" 
+		        sh "kubectl exec -n frontend-test unittest-${env.BUILD_ID} -c frontend -- npm run test"
             }
             post {
                 always {
