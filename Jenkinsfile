@@ -15,6 +15,7 @@ pipeline {
         DOCKERHUB_CRED = credentials('dockerhub-repo')
         FRONTEND_VERSION = "${params.FRONTEND_VERSION}"
         BUILD_ID = "${env.BUILD_ID}"
+        REGION = "us-east-2"
     }
     stages {
         stage('Providing Access Keys') {
