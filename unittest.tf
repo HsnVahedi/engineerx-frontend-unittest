@@ -26,7 +26,7 @@ resource "kubernetes_pod" "unittest" {
         }
 
         requests = {
-          memory = "256Mi"
+          memory = "512Mi"
           cpu    = "700m"
         }
       }
