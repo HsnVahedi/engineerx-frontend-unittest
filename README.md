@@ -43,7 +43,9 @@ Key features of the project:
 In testing terminology, phrases like `unit tests` and `integration tests` could mean different things in different contexts. In this project, `unit tests` means tests that include only one set of microservices. Either [backend microservices](https://github.com/HsnVahedi/engineerx-backend) or [frontend microservices](https://github.com/HsnVahedi/engineerx-frontend).
 
 ## Testing Environment
-Frontend tests are run in the kubernetes cluster created during [creating infrastructure](https://github.com/HsnVahedi/engineerx-aws-infrastructure). A pod named `unittest-${var.test_number}` will be created in `frontend-test` namespace. Then tests are run using [jest](https://jestjs.io/) [Here is the terraform file](https://github.com/HsnVahedi/engineerx-frontend-unittest/blob/main/unittest.tf) which declares `unittest-${var.test_number}` pod.
+Frontend tests are run in the kubernetes cluster created during [creating infrastructure](https://github.com/HsnVahedi/engineerx-aws-infrastructure). A pod named `unittest-${var.test_number}` will be created in `frontend-test` namespace. Then tests are run using [jest](https://jestjs.io/).
+
+[Here is the terraform file](https://github.com/HsnVahedi/engineerx-frontend-unittest/blob/main/unittest.tf) which declares `unittest-${var.test_number}` pod.
 
 See the [Jenkinsfile](https://github.com/HsnVahedi/engineerx-frontend-unittest/blob/main/Jenkinsfile) for more information.
 
